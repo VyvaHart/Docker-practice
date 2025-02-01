@@ -1,19 +1,14 @@
 package main
 
 import (
-    "fmt"
-    "net/http"
-    "os"
+	"fmt"
+	"net/http"
 )
 
 func main() {
-    // Get configuration from environment variables
-    port := os.Getenv("PORT")
-    secretMessage := os.Getenv("SECRET_MESSAGE")
-    http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-        fmt.Fprintf(w, "Hello World!\nSecret message: %s", secretMessage)
-    })
-
-    fmt.Printf("Listening on port %s\n", port)
-    http.ListenAndServe(":" + port, nil)
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintln(w, "Hello World!") // this will be printed as a response when you request /
+	})
+	fmt.Println("Listening on port 8080")
+	http.ListenAndServe(":8080", nil) // this will start the HTTP server (blocking operation) and listen on port 8080
 }
